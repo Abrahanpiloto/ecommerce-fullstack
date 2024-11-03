@@ -15,6 +15,7 @@ const MainCarousel = () => {
     const images = import.meta.glob("../../assets/*.{png,jpg,jpeg,svg}");
     const loadImages = async () => {
       const importedImages = {};
+
       for (const path in images) {
         const module = await images[path]();
         const fileName = path.replace("../../assets/", "");
@@ -26,7 +27,7 @@ const MainCarousel = () => {
     loadImages();
   }, []);
 
-  if (!imagesLoaded) return null; // Muestra nada mientras las imágenes están carg
+  if (!imagesLoaded) return null; // Muestra nada mientras las imágenes están cargando
   return (
     <Carousel
       infiniteLoop={true}
