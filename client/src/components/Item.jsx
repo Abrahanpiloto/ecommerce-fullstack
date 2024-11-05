@@ -16,14 +16,10 @@ const Item = ({ item, width }) => {
     palette: { neutral },
   } = useTheme();
 
-  const { category, price, name, image } = item.attributes;
+  const { category, price, name, image } = item;
   const {
-    data: {
-      attributes: {
-        formats: {
-          medium: { url },
-        },
-      },
+    formats: {
+      medium: { url },
     },
   } = image;
 
