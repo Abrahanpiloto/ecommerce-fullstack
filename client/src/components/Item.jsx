@@ -15,6 +15,7 @@ const Item = ({ item, width }) => {
   const {
     palette: { neutral },
   } = useTheme();
+  // console.log("item", item);
 
   const { category, price, name, image } = item;
   const {
@@ -35,7 +36,7 @@ const Item = ({ item, width }) => {
           width="300px"
           height="400px"
           src={`http://localhost:1337${url}`}
-          onClick={() => navigate(`/item/${item.id}`)}
+          onClick={() => navigate(`/item/${item.documentId}`)}
           style={{ cursor: "pointer" }}
         />
         <Box

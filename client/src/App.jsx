@@ -9,7 +9,7 @@ import CartMenu from "./scenes/global/CartMenu";
 import Footer from "./scenes/global/Footer";
 
 const ScrollToTop = () => {
-  const { pathname } = useLocation;
+  const { pathname } = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
