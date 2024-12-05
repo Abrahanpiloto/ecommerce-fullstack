@@ -158,13 +158,13 @@ const Checkout = () => {
                 />
               )}
               <Box display="flex" justifyContent="space-between" gap="50px">
-                {isSecondStep && (
+                {!isFirstStep && (
                   <Button
                     fullWidth
                     color="primary"
                     variant="contained"
                     sx={{
-                      backgroundColor: shades.primary[200],
+                      backgroundColor: shades.primary[400],
                       boxShadow: "none",
                       color: "white",
                       borderRadius: 0,
@@ -195,7 +195,7 @@ const Checkout = () => {
                     }
                   }}
                 >
-                  {isFirstStep ? "Next" : "Place Order"}
+                  s{!isSecondStep ? "Next" : "Place Order"}
                 </Button>
                 {/* <Wallet
                   initialization={{ preferenceId: "<PREFERENCE_ID>" }}
