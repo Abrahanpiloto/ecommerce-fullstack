@@ -24,10 +24,25 @@ const CartMenu = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
   const isCartOpen = useSelector((state) => state.cart.isCartOpen);
+  console.log(cart);
+  const totalPrice = parseFloat(
+    cart
+      .reduce((total, item) => {
+        return total + item.count * item.price;
+      }, 0)
+      .toFixed(2)
+  );
 
-  const totalPrice = cart.reduce((total, item) => {
-    return total + item.count * item.attributes.price;
-  }, 0);
+  const getShortDescription = (shortDescriptionArray) => {
+    if (!Array.isArray(shortDescriptionArray)) return "";
+    return shortDescriptionArray
+      .map((desc) => {
+        return desc.children
+          .map((child) => (child.type === "text" ? child.text : ""))
+          .join(" ");
+      })
+      .join(" ");
+  };
 
   return (
     <Box
@@ -61,21 +76,19 @@ const CartMenu = () => {
           {/* CART LIST */}
           <Box>
             {cart.map((item) => (
-              <Box key={`${item.attributes.name}-${item.id}`}>
+              <Box key={item?.id}>
                 <FlexBox p="15px 0">
                   <Box flex="1 1 40%">
                     <img
                       alt={item?.name}
                       width="123px"
                       height="164px"
-                      src={`http://localhost:2000${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
+                      src={`http://localhost:1337${item?.image?.url}`}
                     />
                   </Box>
                   <Box flex="1 1 60%">
                     <FlexBox mb="5px">
-                      <Typography fontWeight="bold">
-                        {item.attributes.name}
-                      </Typography>
+                      <Typography fontWeight="bold">{item?.name}</Typography>
                       <IconButton
                         onClick={() =>
                           dispatch(removeFromCart({ id: item.id }))
@@ -84,7 +97,9 @@ const CartMenu = () => {
                         <CloseIcon />
                       </IconButton>
                     </FlexBox>
-                    <Typography>{item.attributes.shortDescription}</Typography>
+                    <Typography>
+                      {getShortDescription(item?.shortDescription)}
+                    </Typography>
                     <FlexBox m="15px 0">
                       <Box
                         display="flex"
@@ -98,7 +113,7 @@ const CartMenu = () => {
                         >
                           <RemoveIcon />
                         </IconButton>
-                        <Typography>{item.count}</Typography>
+                        <Typography>{item?.count}</Typography>
                         <IconButton
                           onClick={() =>
                             dispatch(increaseCount({ id: item.id }))
@@ -107,9 +122,7 @@ const CartMenu = () => {
                           <AddIcon />
                         </IconButton>
                       </Box>
-                      <Typography fontWeight="bold">
-                        ${item.attributes.price}
-                      </Typography>
+                      <Typography fontWeight="bold">${item?.price}</Typography>
                     </FlexBox>
                   </Box>
                 </FlexBox>
@@ -125,13 +138,16 @@ const CartMenu = () => {
               <Typography fontWeight="bold">${totalPrice}</Typography>
             </FlexBox>
             <Button
+              disabled={cart.length === 0}
               sx={{
-                backgroundColor: shades.primary[400],
-                color: "white",
+                backgroundColor:
+                  cart.length === 0 ? "gray" : shades.primary[400],
+                color: cart.length === 0 ? "lightgray" : "white",
                 borderRadius: 0,
                 minWidth: "100%",
                 padding: "20px 40px",
                 m: "20px 0",
+                cursor: cart.length === 0 ? "not-allowed" : "pointer",
               }}
               onClick={() => {
                 navigate("/checkout");

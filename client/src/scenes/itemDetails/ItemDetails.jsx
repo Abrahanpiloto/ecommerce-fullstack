@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux";
 const ItemDetails = () => {
   const dispatch = useDispatch();
   const { itemId } = useParams();
-  console.log(itemId);
+  // console.log(itemId);
   const [value, setValue] = useState("description");
   const [count, setCount] = useState(1);
   const [item, setItem] = useState(null);
@@ -33,7 +33,7 @@ const ItemDetails = () => {
       }
     );
     const itemJson = await item.json();
-    console.log(itemJson);
+    // console.log(itemJson);
 
     setItem(itemJson.data);
   }
@@ -45,7 +45,7 @@ const ItemDetails = () => {
       }
     );
     const itemsJson = await items.json();
-    console.log(itemsJson);
+    // console.log(itemsJson);
 
     setItems(itemsJson.data);
   }
@@ -54,10 +54,6 @@ const ItemDetails = () => {
     getItem();
     getItems();
   }, [itemId]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // const longDescription = item?.longDescription
-  //   ? item.longDescription[0].children.map((child) => child.url || "").join(" ")
-  //   : "";
 
   const getLongDescription = (longDescriptionArray) => {
     if (!Array.isArray(longDescriptionArray)) return "";
