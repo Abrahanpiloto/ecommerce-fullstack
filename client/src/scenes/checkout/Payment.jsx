@@ -27,7 +27,7 @@ const Payment = ({ values, touched, errors, handleBlur, handleChange }) => {
           onBlur={handleBlur}
           onChange={handleChange}
           value={values.phoneNumber}
-          name="email"
+          name="phoneNumber"
           error={!!touched.phoneNumber && !!errors.phoneNumber}
           helperText={touched.phoneNumber && errors.phoneNumber}
           sx={{ gridColumn: "span 4" }}

@@ -170,7 +170,10 @@ const Checkout = () => {
                       borderRadius: 0,
                       padding: "15px 40px",
                     }}
-                    onClick={() => setActiveStep(activeStep - 1)}
+                    onClick={() => {
+                      console.log("Current Step before decrement:", activeStep);
+                      setActiveStep(activeStep - 1);
+                    }}
                   >
                     Back
                   </Button>
@@ -189,13 +192,14 @@ const Checkout = () => {
                   onClick={async () => {
                     const errors = await validateForm();
                     if (Object.keys(errors).length === 0) {
-                      setActiveStep(activeStep - 1);
+                      setActiveStep(activeStep + 1);
                     } else {
                       setTouched(errors);
                     }
+                    console.log(activeStep);
                   }}
                 >
-                  s{!isSecondStep ? "Next" : "Place Order"}
+                  {!isSecondStep ? "Next" : "Place Order"}
                 </Button>
                 {/* <Wallet
                   initialization={{ preferenceId: "<PREFERENCE_ID>" }}
