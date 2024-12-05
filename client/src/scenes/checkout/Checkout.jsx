@@ -34,7 +34,7 @@ const Checkout = () => {
   const initialValues = {
     billingAddress: {
       firstName: "",
-      lastname: "",
+      lastName: "",
       country: "",
       street1: "",
       street2: "",
@@ -45,7 +45,7 @@ const Checkout = () => {
     shippingAddress: {
       isSameAddress: true,
       firstName: "",
-      lastname: "",
+      lastName: "",
       country: "",
       street1: "",
       street2: "",
@@ -61,7 +61,7 @@ const Checkout = () => {
     yup.object().shape({
       billingAddress: yup.object().shape({
         firstName: yup.string().required("required"),
-        lastname: yup.string().required("required"),
+        lastName: yup.string().required("required"),
         country: yup.string().required("required"),
         street1: yup.string().required("required"),
         street2: yup.string(),
@@ -76,7 +76,7 @@ const Checkout = () => {
           is: false,
           then: yup.string().required("required"),
         }),
-        lastname: yup.string().when("isSameAddress", {
+        lastName: yup.string().when("isSameAddress", {
           is: false,
           then: yup.string().required("required"),
         }),
@@ -180,7 +180,7 @@ const Checkout = () => {
                   color="primary"
                   variant="contained"
                   sx={{
-                    backgroundColor: shades.primary[200],
+                    backgroundColor: shades.primary[400],
                     boxShadow: "none",
                     color: "white",
                     borderRadius: 0,
